@@ -4,8 +4,10 @@ const songTitle = document.getElementById("songTitle");
 const imageFiles = document.getElementById("imageFiles");
 const fileButton = document.getElementById("fileButton");
 const mergeButton = document.getElementById("mergeButton");
-const previewContainer = document.getElementById("previewContainer");
-const resultCanvas = document.getElementById("resultCanvas");
+const previewContainer = document.getElementById('previewContainer');
+const resultCanvas = document.getElementById('resultCanvas');
+const cardFrame = document.querySelector('.card-frame');
+const cardShadow = document.querySelector('.card-shadow');
 const downloadButton = document.getElementById("downloadButton");
 const status = document.getElementById("status");
 
@@ -15,11 +17,12 @@ fileButton.addEventListener("click", () => {
 
 imageFiles.addEventListener("change", () => {
   if (imageFiles.files.length > 0) {
-    generateSheetMusic(); // 파일을 선택하자마자 바로 병합 함수 실행
+    generateSheetMusic();
   }
 });
 
 mergeButton.addEventListener("click", generateSheetMusic);
+
 downloadButton.addEventListener("click", () => {
   if (!finalDataUrl) return;
   const link = document.createElement("a");
@@ -87,10 +90,13 @@ async function generateSheetMusic() {
     });
 
     finalDataUrl = resultCanvas.toDataURL("image/jpeg", 1.0);
-    const newHeight = 451 + resultCanvas.height + 100;
-    document.querySelector('.sheetmusic-app').style.height = newHeight + 'px';
-    document.querySelector('.card-frame').style.height = (newHeight - 30) + 'px';
-    document.querySelector('.card-shadow').style.height = (newHeight - 30) + 'px';
+
+    // [핵심] 악보가 다 만들어진 후 캔버스 높이에 맞춰 프레임 크기 조절
+    const exactHeight = 450 + resultCanvas.height + 60;
+    cardFrame.style.height = exactHeight + 'px';
+    cardShadow.style.height = exactHeight + 'px';
+    document.querySelector('.sheetmusic-app').style.height = exactHeight + 100 + 'px';
+
     previewContainer.classList.add("is-visible");
     showStatus(`${files.length}개의 악보를 성공적으로 합쳤습니다.`);
   } catch (error) {
