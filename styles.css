@@ -77,11 +77,11 @@ body {
 
 .input-panel {
   left: 431px;
-  top: 171px;
+  top: 196px;
   width: 425px;
-  height: 126px;
+  height: 100px;
   opacity: 0.8;
-  filter: drop-shadow(4px 4px 0 rgba(0, 0, 0, 0.25));
+  filter: drop-shadow(4px 8px 0 rgba(0, 0, 0, 0.28));
   transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   transform-origin: center center;
 }
@@ -91,8 +91,7 @@ body {
   top: 40px;
   width: 287px;
   height: 114px;
-  opacity: 0.8;
-  filter: drop-shadow(4px 4px 0 rgba(0, 0, 0, 0.25));
+  filter: drop-shadow(4px 8px 0 rgba(0, 0, 0, 0.28));
 }
 
 .result-panel {
@@ -122,7 +121,7 @@ body {
   top: 351px;
   width: 70px;
   height: 59px;
-  filter: drop-shadow(4px 4px 0 rgba(0, 0, 0, 0.25));
+  filter: drop-shadow(4px 8px 0 rgba(0, 0, 0, 0.28));
   transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   transform-origin: center center;
 }
@@ -132,7 +131,7 @@ body {
   top: 361px;
   width: 48px;
   height: 39px;
-  filter: drop-shadow(4px 4px 0 rgba(0, 0, 0, 0.25));
+  filter: drop-shadow(4px 8px 0 rgba(0, 0, 0, 0.28));
   transform: rotate(90deg);
   animation: floatFinger 3s ease-in-out infinite;
 }
@@ -260,7 +259,7 @@ body {
   border-radius: 10px;
   background: url("image/ok.png") center / contain no-repeat;
   cursor: pointer;
-  filter: drop-shadow(4px 4px 0 rgba(0, 0, 0, 0.25));
+  filter: drop-shadow(4px 8px 0 rgba(0, 0, 0, 0.28));
   transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275),
     filter 0.2s ease;
   animation: floatOk 2.8s ease-in-out infinite;
@@ -268,7 +267,7 @@ body {
 
 .download-button:hover {
   transform: translateY(-2px) scale(1.04);
-  filter: drop-shadow(6px 6px 0 rgba(0, 0, 0, 0.28));
+  filter: drop-shadow(6px 10px 0 rgba(0, 0, 0, 0.3));
 }
 
 .download-button:active {
