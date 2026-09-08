@@ -4,10 +4,8 @@ const songTitle = document.getElementById("songTitle");
 const imageFiles = document.getElementById("imageFiles");
 const fileButton = document.getElementById("fileButton");
 const mergeButton = document.getElementById("mergeButton");
-const previewContainer = document.getElementById('previewContainer');
-const resultCanvas = document.getElementById('resultCanvas');
-const cardFrame = document.querySelector('.card-frame');
-const cardShadow = document.querySelector('.card-shadow');
+const previewContainer = document.getElementById("previewContainer");
+const resultCanvas = document.getElementById("resultCanvas");
 const downloadButton = document.getElementById("downloadButton");
 const status = document.getElementById("status");
 
@@ -17,7 +15,7 @@ fileButton.addEventListener("click", () => {
 
 imageFiles.addEventListener("change", () => {
   if (imageFiles.files.length > 0) {
-    generateSheetMusic();
+    showStatus(`${imageFiles.files.length}개의 악보를 선택했습니다.`);
   }
 });
 
@@ -66,37 +64,37 @@ async function generateSheetMusic() {
   try {
     const loadedImages = await Promise.all(files.map(loadImage));
     const ctx = resultCanvas.getContext("2d");
-    const maxWidth = Math.max(...loadedImages.map((image) => image.width));
-    const titleHeight = 150;
-    const totalImageHeight = loadedImages.reduce((sum, image) => sum + image.height, 0);
 
-    resultCanvas.width = maxWidth + 60;
-    resultCanvas.height = titleHeight + totalImageHeight + 40;
+    const targetWidth = 385;
+    let totalHeight = 0;
+    const scaledDimensions = loadedImages.map((image) => {
+      const scale = targetWidth / image.width;
+      const scaledHeight = image.height * scale;
+      totalHeight += scaledHeight;
+      return { width: targetWidth, height: scaledHeight };
+    });
+
+    const titleHeight = 120;
+    resultCanvas.width = 425;
+    resultCanvas.height = titleHeight + totalHeight + 40;
 
     ctx.fillStyle = "white";
     ctx.fillRect(0, 0, resultCanvas.width, resultCanvas.height);
 
     ctx.fillStyle = "black";
-    ctx.font = "bold 70px 'Malgun Gothic', serif";
+    ctx.font = "bold 45px 'Malgun Gothic', serif";
     ctx.textAlign = "left";
-    ctx.fillText(title, 40, 100);
+    ctx.fillText(title, 30, 80);
 
     let currentY = titleHeight;
-
-    loadedImages.forEach((image) => {
-      const xOffset = (resultCanvas.width - image.width) / 2;
-      ctx.drawImage(image, xOffset, currentY);
-      currentY += image.height;
+    loadedImages.forEach((image, index) => {
+      const dim = scaledDimensions[index];
+      const xOffset = (resultCanvas.width - dim.width) / 2;
+      ctx.drawImage(image, xOffset, currentY, dim.width, dim.height);
+      currentY += dim.height;
     });
 
     finalDataUrl = resultCanvas.toDataURL("image/jpeg", 1.0);
-
-    // [핵심] 악보가 다 만들어진 후 캔버스 높이에 맞춰 프레임 크기 조절
-    const exactHeight = 450 + resultCanvas.height + 60;
-    cardFrame.style.height = exactHeight + 'px';
-    cardShadow.style.height = exactHeight + 'px';
-    document.querySelector('.sheetmusic-app').style.height = exactHeight + 100 + 'px';
-
     previewContainer.classList.add("is-visible");
     showStatus(`${files.length}개의 악보를 성공적으로 합쳤습니다.`);
   } catch (error) {
