@@ -15,8 +15,7 @@ fileButton.addEventListener("click", () => {
 
 imageFiles.addEventListener("change", () => {
   if (imageFiles.files.length > 0) {
-    const count = imageFiles.files.length;
-    showStatus(`${count}개의 악보를 선택했습니다.`);
+    generateSheetMusic(); // 파일을 선택하자마자 바로 병합 함수 실행
   }
 });
 
