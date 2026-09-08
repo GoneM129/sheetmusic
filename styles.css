@@ -26,22 +26,6 @@ body {
   overflow: hidden;
 }
 
-/* GIF나 패턴 이미지가 화면 전체에 깔리며 자연스럽게 움직이는 배경 레이어 */
-.sheetmusic-app::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('image/49c8c18f9af07b179931c9a42f9a8a3d.gif');
-  background-repeat: repeat;
-  background-size: 300px 300px;
-  pointer-events: none;
-  z-index: 1;
-  opacity: 0.3;
-}
-
 .card-shadow {
   position: absolute;
   left: 372px;
