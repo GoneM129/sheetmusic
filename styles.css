@@ -13,7 +13,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  background: #dcd6f7;
+  background: #333A3F;
   font-family: "Malgun Gothic", "Noto Sans KR", sans-serif;
   overflow: auto;
 }
@@ -22,7 +22,7 @@ body {
   position: relative;
   width: 1366px;
   min-height: 100vh;
-  background: #dcd6f7;
+  background: #333A3F;
   overflow: hidden;
 }
 
