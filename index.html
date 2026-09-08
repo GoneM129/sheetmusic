@@ -7,64 +7,43 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div class="sheetmusic-app">
-      <div class="card-shadow"></div>
-      <div class="card-frame">
-        <img
-          class="bg-image"
-          src="image/e-15-c-630-c-7-fa-6-ec-5523738648-a-2-ea-8259-10.png"
-          alt=""
-        />
-      </div>
+<div class="sheetmusic-app">
+  <div class="card-frame">
+    <!-- 배경 이미지 (자동으로 꽉 참) -->
+    <img class="bg-image" src="image/e-15-c-630-c-7-fa-6-ec-5523738648-a-2-ea-8259-10.png" alt="" />
 
+    <!-- 1. 로고 -->
+    <img class="logo" src="image/_11.png" alt="" />
+
+    <!-- 2. 제목 입력 그룹 -->
+    <div class="input-group">
       <img class="input-panel" src="image/_10.png" alt="" />
-      <img class="logo" src="image/_11.png" alt="" />
-      <img class="result-panel" src="image/_20.png" alt="" />
       <img class="title-label" src="image/_12.png" alt="" />
-      <img class="instruction-label" src="image/_2-10.png" alt="" />
-      <img class="file-button" src="image/_13.png" alt="" />
-      <img class="finger-icon" src="image/_14.png" alt="" />
-
-      <input
-        class="title-input"
-        id="songTitle"
-        type="text"
-        aria-label="곡 제목"
-        placeholder=""
-        autocomplete="off"
-      />
-
-      <input
-        class="file-input"
-        id="imageFiles"
-        type="file"
-        accept="image/*"
-        multiple
-      />
-
-      <button
-        class="file-hit-area"
-        id="fileButton"
-        type="button"
-        aria-label="악보 사진 선택"
-      ></button>
-
-      <button
-        class="merge-button"
-        id="mergeButton"
-        type="button"
-        aria-label="악보 합치기"
-      ></button>
-
-      <div class="status" id="status"></div>
-
-      <div class="result-area" id="previewContainer">
-        <canvas id="resultCanvas"></canvas>
-        <button class="download-button" id="downloadButton" type="button">
-          사진으로 저장하기
-        </button>
-      </div>
+      <input class="title-input" id="songTitle" type="text" autocomplete="off" />
     </div>
+
+    <!-- 3. 업로드 및 버튼 그룹 -->
+    <div class="upload-group">
+      <img class="instruction-label" src="image/_2-10.png" alt="" />
+      <div class="button-area">
+        <button class="file-hit-area" id="fileButton" type="button"></button>
+        <input class="file-input" id="imageFiles" type="file" accept="image/*" multiple />
+        <img class="file-button" src="image/_13.png" alt="" />
+        <img class="finger-icon" src="image/_14.png" alt="" />
+      </div>
+      <button class="merge-button" id="mergeButton" type="button"></button>
+    </div>
+
+    <div class="status" id="status"></div>
+
+    <!-- 4. 결과 출력 영역 -->
+    <div class="result-area" id="previewContainer">
+      <img class="result-panel" src="image/_20.png" alt="" />
+      <canvas id="resultCanvas"></canvas>
+      <button class="download-button" id="downloadButton" type="button">사진으로 저장하기</button>
+    </div>
+  </div>
+</div>
 
     <script src="app.js"></script>
   </body>

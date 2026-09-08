@@ -88,6 +88,10 @@ async function generateSheetMusic() {
     });
 
     finalDataUrl = resultCanvas.toDataURL("image/jpeg", 1.0);
+    const newHeight = 451 + resultCanvas.height + 100;
+    document.querySelector('.sheetmusic-app').style.height = newHeight + 'px';
+    document.querySelector('.card-frame').style.height = (newHeight - 30) + 'px';
+    document.querySelector('.card-shadow').style.height = (newHeight - 30) + 'px';
     previewContainer.classList.add("is-visible");
     showStatus(`${files.length}개의 악보를 성공적으로 합쳤습니다.`);
   } catch (error) {
