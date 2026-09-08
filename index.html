@@ -1,562 +1,71 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <title>은근히 원하는 악보사무소</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- index2.html에서 사용하던 경로를 그대로 유지 -->
-    <link rel="stylesheet" href="./style/vars.css">
-    <link rel="stylesheet" href="./style/style.css">
-
-    <style>
-        /*
-         * index2.html의 디자인을 유지하면서
-         * index.html의 실제 기능을 올려놓기 위한 스타일입니다.
-         */
-
-        a,
-        button,
-        input,
-        select,
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            border: none;
-            text-decoration: none;
-            background: none;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        menu,
-        ol,
-        ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        html,
-        body {
-            width: 100%;
-            min-height: 100%;
-        }
-
-        body {
-            overflow-x: hidden;
-            background: #202020;
-        }
-
-        /*
-         * index2.html의 mac-book-air-1 영역 위에
-         * 실제 입력 컨트롤을 배치합니다.
-         */
-        .mac-book-air-1 {
-            position: relative;
-            width: 100%;
-            min-height: 100vh;
-            overflow: hidden;
-        }
-
-        .rectangle-1 {
-            position: absolute;
-            inset: 0;
-        }
-
-        .e-15-c-630-c-7-fa-6-ec-5523738648-a-2-ea-8259-1 {
-            display: block;
-            position: absolute;
-            object-fit: cover;
-            pointer-events: none;
-        }
-
-        ._1,
-        ._12,
-        ._2,
-        ._13,
-        ._2-1,
-        ._14,
-        ._15 {
-            position: absolute;
-            display: block;
-            pointer-events: none;
-        }
-
-        /*
-         * 실제 입력 영역
-         *
-         * 배경 디자인 이미지와 겹쳐 놓고,
-         * 이미지가 아닌 HTML 요소가 클릭/입력을 담당합니다.
-         */
-        .title-input {
-            position: absolute;
-            z-index: 10;
-            background: transparent;
-            outline: none;
-            color: #111;
-            font-family: "Malgun Gothic", sans-serif;
-            font-size: 22px;
-            font-weight: 500;
-            text-align: left;
-        }
-
-        .title-input::placeholder {
-            color: transparent;
-        }
-
-        .file-input {
-            position: absolute;
-            z-index: 10;
-            opacity: 0;
-            cursor: pointer;
-        }
-
-        .file-hit-area {
-            position: absolute;
-            z-index: 11;
-            cursor: pointer;
-        }
-
-        .merge-button {
-            position: absolute;
-            z-index: 12;
-            border: 0;
-            background: transparent;
-            cursor: pointer;
-        }
-
-        .result-area {
-            position: absolute;
-            z-index: 5;
-            overflow: auto;
-            display: none;
-            padding: 20px;
-            border-radius: 10px;
-        }
-
-        .result-area.is-visible {
-            display: block;
-        }
-
-        #resultCanvas {
-            display: block;
-            max-width: 100%;
-            height: auto;
-            margin: 0 auto;
-        }
-
-        .download-button {
-            display: block;
-            margin: 15px auto 0;
-            padding: 10px 18px;
-            border-radius: 8px;
-            background: #222;
-            color: #fff;
-            font-family: "Malgun Gothic", sans-serif;
-            font-size: 14px;
-            cursor: pointer;
-        }
-
-        .status {
-            position: absolute;
-            z-index: 20;
-            display: none;
-            font-family: "Malgun Gothic", sans-serif;
-            font-size: 13px;
-            color: #333;
-            white-space: nowrap;
-        }
-
-        .status.is-visible {
-            display: block;
-        }
-
-        /*
-         * 화면 크기가 달라져도 index2.html의 중앙 카드가
-         * 화면 중앙에 위치하도록 보정합니다.
-         */
-        @media (max-width: 900px) {
-            .mac-book-air-1 {
-                transform-origin: top center;
-            }
-        }
-    </style>
-</head>
-
-<body>
-    <div class="mac-book-air-1">
-        <!-- index2.html의 기존 디자인 요소 -->
-        <div class="rectangle-1"></div>
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>sheetmusic</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="sheetmusic-app">
+      <div class="card-shadow"></div>
+      <div class="card-frame">
         <img
-            class="e-15-c-630-c-7-fa-6-ec-5523738648-a-2-ea-8259-1"
-            src="image/e-15-c-630-c-7-fa-6-ec-5523738648-a-2-ea-8259-10.png"
-            alt=""
+          class="bg-image"
+          src="image/e-15-c-630-c-7-fa-6-ec-5523738648-a-2-ea-8259-10.png"
+          alt=""
         />
+      </div>
 
-        <img class="_1" src="image/_10.png" alt="" />
-        <img class="_12" src="image/_11.png" alt="" />
-        <img class="_2" src="image/_20.png" alt="" />
-        <img class="_13" src="image/_12.png" alt="" />
-        <img class="_2-1" src="image/_2-10.png" alt="" />
-        <img class="_14" src="image/_13.png" alt="" />
-        <img class="_15" src="image/_14.png" alt="" />
+      <img class="input-panel" src="image/_10.png" alt="" />
+      <img class="logo" src="image/_11.png" alt="" />
+      <img class="result-panel" src="image/_20.png" alt="" />
+      <img class="title-label" src="image/_12.png" alt="" />
+      <img class="instruction-label" src="image/_2-10.png" alt="" />
+      <img class="file-button" src="image/_13.png" alt="" />
+      <img class="finger-icon" src="image/_14.png" alt="" />
 
-        <!-- 실제 기능 영역 -->
-        <input
-            class="title-input"
-            type="text"
-            id="songTitle"
-            aria-label="곡 제목"
-            placeholder=""
-            autocomplete="off"
-        />
+      <input
+        class="title-input"
+        id="songTitle"
+        type="text"
+        aria-label="곡 제목"
+        placeholder=""
+        autocomplete="off"
+      />
 
-        <input
-            class="file-input"
-            type="file"
-            id="imageFiles"
-            accept="image/*"
-            multiple
-        />
+      <input
+        class="file-input"
+        id="imageFiles"
+        type="file"
+        accept="image/*"
+        multiple
+      />
 
-        <button
-            class="file-hit-area"
-            id="fileButton"
-            type="button"
-            aria-label="악보 사진 선택"
-        ></button>
+      <button
+        class="file-hit-area"
+        id="fileButton"
+        type="button"
+        aria-label="악보 사진 선택"
+      ></button>
 
-        <button
-            class="merge-button"
-            id="mergeButton"
-            type="button"
-            aria-label="악보 합치기"
-        ></button>
+      <button
+        class="merge-button"
+        id="mergeButton"
+        type="button"
+        aria-label="악보 합치기"
+      ></button>
 
-        <div class="status" id="status"></div>
+      <div class="status" id="status"></div>
 
-        <div class="result-area" id="previewContainer">
-            <canvas id="resultCanvas"></canvas>
-
-            <button
-                class="download-button"
-                id="downloadButton"
-                type="button"
-            >
-                사진으로 저장하기
-            </button>
-        </div>
+      <div class="result-area" id="previewContainer">
+        <canvas id="resultCanvas"></canvas>
+        <button class="download-button" id="downloadButton" type="button">
+          사진으로 저장하기
+        </button>
+      </div>
     </div>
 
-    <script>
-        let finalDataUrl = "";
-
-        const songTitle = document.getElementById("songTitle");
-        const imageFiles = document.getElementById("imageFiles");
-        const fileButton = document.getElementById("fileButton");
-        const mergeButton = document.getElementById("mergeButton");
-        const previewContainer = document.getElementById(
-            "previewContainer"
-        );
-        const resultCanvas = document.getElementById("resultCanvas");
-        const downloadButton = document.getElementById("downloadButton");
-        const status = document.getElementById("status");
-
-        /*
-         * index2.html의 디자인 요소는 이미지로 되어 있으므로
-         * 실제 클릭 가능한 영역을 디자인 위에 맞춰 배치합니다.
-         *
-         * 기준 화면은 제공된 디자인 이미지의 1366 x 768 비율입니다.
-         * 아래 함수가 브라우저 크기에 맞춰 좌표를 비율로 보정합니다.
-         */
-        function setInteractiveLayout() {
-            const container = document.querySelector(".mac-book-air-1");
-            const width = container.clientWidth;
-            const height = Math.max(
-                container.clientHeight,
-                window.innerHeight
-            );
-
-            /*
-             * 디자인 카드의 기준 좌표.
-             * 중앙 카드가 약 580px 폭인 현재 시안에 맞춘 값입니다.
-             */
-            const baseWidth = 1366;
-            const baseHeight = 768;
-            const scale = Math.min(
-                width / baseWidth,
-                height / baseHeight
-            );
-
-            const cardWidth = 580 * scale;
-            const cardHeight = 665 * scale;
-            const cardLeft = (width - cardWidth) / 2;
-            const cardTop = 97 * scale;
-
-            /*
-             * 제목 입력창.
-             */
-            setBox(
-                songTitle,
-                cardLeft + 77 * scale,
-                cardTop + 200 * scale,
-                420 * scale,
-                82 * scale
-            );
-
-            /*
-             * 파일 선택 버튼 영역.
-             */
-            setBox(
-                fileButton,
-                cardLeft + 190 * scale,
-                cardTop + 365 * scale,
-                210 * scale,
-                65 * scale
-            );
-
-            /*
-             * 투명 file input 자체는 버튼 영역 전체를 덮습니다.
-             */
-            setBox(
-                imageFiles,
-                cardLeft + 160 * scale,
-                cardTop + 350 * scale,
-                270 * scale,
-                100 * scale
-            );
-
-            /*
-             * 결과 영역.
-             */
-            setBox(
-                previewContainer,
-                cardLeft + 80 * scale,
-                cardTop + 475 * scale,
-                420 * scale,
-                165 * scale
-            );
-
-            /*
-             * 현재 시안에는 별도의 "합치기" 버튼 이미지가 없으므로
-             * 파일을 선택하면 바로 합치도록 하고,
-             * mergeButton은 파일 영역 아래의 넓은 클릭 영역으로 둡니다.
-             */
-            setBox(
-                mergeButton,
-                cardLeft + 100 * scale,
-                cardTop + 425 * scale,
-                380 * scale,
-                45 * scale
-            );
-
-            status.style.left = `${cardLeft + 90 * scale}px`;
-            status.style.top = `${cardTop + 455 * scale}px`;
-        }
-
-        function setBox(element, left, top, width, height) {
-            element.style.left = `${left}px`;
-            element.style.top = `${top}px`;
-            element.style.width = `${width}px`;
-            element.style.height = `${height}px`;
-        }
-
-        /*
-         * 파일 선택 버튼을 클릭하면 실제 파일 선택창을 엽니다.
-         */
-        fileButton.addEventListener("click", () => {
-            imageFiles.click();
-        });
-
-        /*
-         * 투명 file input을 직접 클릭해도 정상 동작합니다.
-         */
-        imageFiles.addEventListener("change", () => {
-            if (imageFiles.files.length > 0) {
-                const count = imageFiles.files.length;
-                showStatus(`${count}개의 악보를 선택했습니다.`);
-            }
-        });
-
-        mergeButton.addEventListener("click", generateSheetMusic);
-
-        /*
-         * 시안에서 파일 선택 영역을 클릭했을 때
-         * 사용자가 자연스럽게 "합치기"까지 할 수 있도록
-         * 선택 후 mergeButton 영역에서도 실행됩니다.
-         */
-        document.addEventListener("keydown", (event) => {
-            if (
-                event.key === "Enter" &&
-                document.activeElement === songTitle
-            ) {
-                generateSheetMusic();
-            }
-        });
-
-        async function generateSheetMusic() {
-            const title = songTitle.value.trim();
-
-            if (!title) {
-                alert("제목을 입력해주세요!");
-                songTitle.focus();
-                return;
-            }
-
-            if (imageFiles.files.length === 0) {
-                alert("사진을 선택해주세요!");
-                imageFiles.click();
-                return;
-            }
-
-            showStatus("악보를 합치는 중입니다...");
-
-            /*
-             * index.html의 기능 그대로:
-             * 파일 이름의 숫자를 고려하여 자연 정렬합니다.
-             */
-            const files = Array.from(imageFiles.files).sort(
-                (first, second) =>
-                    first.name.localeCompare(
-                        second.name,
-                        undefined,
-                        { numeric: true }
-                    )
-            );
-
-            try {
-                const loadedImages = await Promise.all(
-                    files.map(loadImage)
-                );
-
-                const ctx = resultCanvas.getContext("2d");
-
-                /*
-                 * index.html의 이미지 합성 방식을 그대로 유지합니다.
-                 */
-                const maxWidth = Math.max(
-                    ...loadedImages.map((image) => image.width)
-                );
-
-                const titleHeight = 150;
-
-                const totalImageHeight = loadedImages.reduce(
-                    (sum, image) => sum + image.height,
-                    0
-                );
-
-                resultCanvas.width = maxWidth + 60;
-                resultCanvas.height =
-                    titleHeight + totalImageHeight + 40;
-
-                ctx.fillStyle = "white";
-                ctx.fillRect(
-                    0,
-                    0,
-                    resultCanvas.width,
-                    resultCanvas.height
-                );
-
-                ctx.fillStyle = "black";
-                ctx.font =
-                    "bold 70px 'Malgun Gothic', serif";
-                ctx.textAlign = "left";
-                ctx.fillText(title, 40, 100);
-
-                let currentY = titleHeight;
-
-                loadedImages.forEach((image) => {
-                    const xOffset =
-                        (resultCanvas.width - image.width) / 2;
-
-                    ctx.drawImage(
-                        image,
-                        xOffset,
-                        currentY
-                    );
-
-                    currentY += image.height;
-                });
-
-                finalDataUrl = resultCanvas.toDataURL(
-                    "image/jpeg",
-                    1.0
-                );
-
-                previewContainer.classList.add("is-visible");
-                showStatus(
-                    `${files.length}개의 악보를 성공적으로 합쳤습니다.`
-                );
-            } catch (error) {
-                console.error(error);
-                alert("악보 이미지를 불러오는 중 오류가 발생했습니다.");
-                showStatus("");
-            }
-        }
-
-        function loadImage(file) {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-
-                reader.onload = (event) => {
-                    const image = new Image();
-
-                    image.onload = () => resolve(image);
-                    image.onerror = reject;
-                    image.src = event.target.result;
-                };
-
-                reader.onerror = reject;
-                reader.readAsDataURL(file);
-            });
-        }
-
-        function downloadImage() {
-            if (!finalDataUrl) {
-                alert("먼저 악보를 합쳐주세요!");
-                return;
-            }
-
-            const title = songTitle.value.trim() || "악보";
-            const link = document.createElement("a");
-
-            link.download = `${title}_통합본.jpg`;
-            link.href = finalDataUrl;
-            link.click();
-        }
-
-        downloadButton.addEventListener(
-            "click",
-            downloadImage
-        );
-
-        function showStatus(message) {
-            status.textContent = message;
-
-            if (message) {
-                status.classList.add("is-visible");
-            } else {
-                status.classList.remove("is-visible");
-            }
-        }
-
-        window.addEventListener(
-            "resize",
-            setInteractiveLayout
-        );
-
-        window.addEventListener(
-            "load",
-            setInteractiveLayout
-        );
-    </script>
-</body>
+    <script src="app.js"></script>
+  </body>
 </html>

@@ -1,0 +1,245 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #202020;
+  font-family: "Malgun Gothic", "Noto Sans KR", sans-serif;
+  overflow: hidden;
+}
+
+.sheetmusic-app {
+  position: relative;
+  width: 1366px;
+  height: 768px;
+  background: #515a78;
+  overflow: hidden;
+}
+
+.card-shadow {
+  position: absolute;
+  left: 372px;
+  top: 17px;
+  width: 548px;
+  height: 798px;
+  border-radius: 24px;
+  background: #505075;
+  box-shadow: 8px 9px 4px rgba(0, 0, 0, 0.25);
+}
+
+.card-frame {
+  position: absolute;
+  left: 366px;
+  top: 11px;
+  width: 548px;
+  height: 798px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 15px 15px 4px rgba(0, 0, 0, 0.25);
+}
+
+.bg-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.input-panel,
+.logo,
+.result-panel,
+.title-label,
+.instruction-label,
+.file-button,
+.finger-icon {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+}
+
+.input-panel {
+  left: 431px;
+  top: 171px;
+  width: 425px;
+  height: 126px;
+  opacity: 0.8;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.logo {
+  left: 496px;
+  top: 40px;
+  width: 287px;
+  height: 114px;
+  opacity: 0.8;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.result-panel {
+  left: 431px;
+  top: 451px;
+  width: 425px;
+  height: 358px;
+  opacity: 0.5;
+}
+
+.title-label {
+  left: 440px;
+  top: 177px;
+  width: 209px;
+  height: 18px;
+}
+
+.instruction-label {
+  left: 440px;
+  top: 310px;
+  width: 400px;
+  height: 35px;
+}
+
+.file-button {
+  left: 634px;
+  top: 351px;
+  width: 70px;
+  height: 59px;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.finger-icon {
+  left: 569px;
+  top: 361px;
+  width: 48px;
+  height: 39px;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+  transform: rotate(90deg);
+}
+
+.title-input {
+  position: absolute;
+  left: 431px;
+  top: 171px;
+  width: 420px;
+  height: 82px;
+  z-index: 10;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #111;
+  font-size: 22px;
+  font-weight: 500;
+  padding: 0 18px;
+}
+
+.title-input::placeholder {
+  color: transparent;
+}
+
+.file-input {
+  position: absolute;
+  left: 430px;
+  top: 345px;
+  width: 270px;
+  height: 100px;
+  z-index: 10;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.file-hit-area {
+  position: absolute;
+  left: 500px;
+  top: 340px;
+  width: 230px;
+  height: 100px;
+  z-index: 11;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.merge-button {
+  position: absolute;
+  left: 470px;
+  top: 425px;
+  width: 310px;
+  height: 60px;
+  z-index: 12;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.status {
+  position: absolute;
+  left: 440px;
+  top: 430px;
+  z-index: 20;
+  display: none;
+  color: #333;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.status.is-visible {
+  display: block;
+}
+
+.result-area {
+  position: absolute;
+  left: 431px;
+  top: 451px;
+  width: 425px;
+  height: 358px;
+  z-index: 5;
+  overflow: auto;
+  display: none;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.result-area.is-visible {
+  display: block;
+}
+
+#resultCanvas {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+  background: white;
+}
+
+.download-button {
+  display: block;
+  width: fit-content;
+  margin: 15px auto 0;
+  padding: 10px 18px;
+  border-radius: 8px;
+  background: #222;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .sheetmusic-app {
+    transform: scale(calc(100vw / 1366));
+    transform-origin: top center;
+  }
+
+  body {
+    justify-content: flex-start;
+  }
+}
