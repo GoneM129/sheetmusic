@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>악보 생성기</title>
+    <style>
+        body { font-family: 'Malgun Gothic', sans-serif; background: #fdfbf7; padding: 20px; text-align: center; }
+        .container { max-width: 600px; margin: auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        h2 { color: #333; }
+        .step { text-align: left; font-weight: bold; margin-top: 25px; color: #555; }
+        input[type="text"] { width: 90%; padding: 15px; margin-top: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; box-sizing: border-box; }
+        input[type="file"] { margin-top: 10px; font-size: 15px; }
+        button { background: #ffb6c1; border: none; padding: 15px 20px; font-size: 18px; border-radius: 8px; cursor: pointer; color: white; font-weight: bold; width: 90%; margin-top: 25px; }
+        button:hover { background: #ff91a4; }
+        #preview-container { margin-top: 30px; display: none; padding-top: 20px; border-top: 2px dashed #eee; }
+        canvas { max-width: 100%; border: 1px solid #ccc; border-radius: 8px; margin-bottom: 10px; }
+        .download-btn { background: #87CEFA; }
+        .download-btn:hover { background: #5cbeff; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>🎵 나만의 악보 만들기</h2>
+        
+        <div class="step">1. 악보 제목을 적어주세요.</div>
+        <input type="text" id="songTitle" placeholder="예: 밤편지">
+
+        <div class="step">2. 분할된 악보 사진을 한 번에 모두 선택해주세요.</div>
+        <div style="text-align: left; font-size: 13px; color: #888; margin-bottom: 10px;">(파일 이름에 숫자가 있으면 자동으로 순서가 맞춰집니다)</div>
+        <input type="file" id="imageFiles" accept="image/*" multiple>
+
+        <button onclick="generateSheetMusic()">✨ 악보 합치기</button>
+
+        <div id="preview-container">
+            <h3>미리보기</h3>
+            <canvas id="resultCanvas"></canvas>
+            <button class="download-btn" onclick="downloadImage()">💾 사진으로 저장하기</button>
+        </div>
+    </div>
+
+    <script>
+        let finalDataUrl = '';
+
+        async function generateSheetMusic() {
+            const title = document.getElementById('songTitle').value;
+            const fileInput = document.getElementById('imageFiles');
+            
+            if (!title) return alert("제목을 입력해주세요!");
+            if (fileInput.files.length === 0) return alert("사진을 선택해주세요!");
+
+            // 파일 이름의 숫자를 기준으로 자동 정렬 (밤편지1, 밤편지2 순서 보장)
+            const files = Array.from(fileInput.files).sort((a, b) => 
+                a.name.localeCompare(b.name, undefined, {numeric: true})
+            );
+
+            // 이미지 로드
+            const loadedImages = await Promise.all(files.map(file => {
+                return new Promise((resolve) => {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        const img = new Image();
+                        img.onload = () => resolve(img);
+                        img.src = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                });
+            }));
+
+            const canvas = document.getElementById('resultCanvas');
+            const ctx = canvas.getContext('2d');
+
+            // 캔버스 크기 계산
+            const maxWidth = Math.max(...loadedImages.map(img => img.width));
+            const titleHeight = 150; 
+            const totalImageHeight = loadedImages.reduce((sum, img) => sum + img.height, 0);
+
+            canvas.width = maxWidth + 60; // 좌우 여백
+            canvas.height = titleHeight + totalImageHeight + 40; // 상하 여백
+
+            // 1. 흰색 배경 채우기
+            ctx.fillStyle = "white";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // 2. 제목 쓰기
+            ctx.fillStyle = "black";
+            ctx.font = "bold 70px 'Malgun Gothic', serif";
+            ctx.textAlign = "left";
+            ctx.fillText(title, 40, 100);
+
+            // 3. 이미지 순서대로 이어 붙이기
+            let currentY = titleHeight;
+            loadedImages.forEach(img => {
+                const xOffset = (canvas.width - img.width) / 2; // 가로 중앙 정렬
+                ctx.drawImage(img, xOffset, currentY);
+                currentY += img.height;
+            });
+
+            // 완료 후 미리보기 및 저장 버튼 표시
+            document.getElementById('preview-container').style.display = 'block';
+            finalDataUrl = canvas.toDataURL('image/jpeg', 1.0);
+        }
+
+        function downloadImage() {
+            const title = document.getElementById('songTitle').value || "악보";
+            const link = document.createElement('a');
+            link.download = `${title}_통합본.jpg`;
+            link.href = finalDataUrl;
+            link.click();
+        }
+    </script>
+</body>
+</html>
