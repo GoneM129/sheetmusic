@@ -13,17 +13,20 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  background: #333A3F;
+  background: #515a78;
   font-family: "Malgun Gothic", "Noto Sans KR", sans-serif;
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .sheetmusic-app {
   position: relative;
-  width: 1366px;
-  min-height: 100vh;
-  background: #333A3F;
-  overflow: hidden;
+  width: min(100vw, 1366px);
+  min-height: 768px;
+  height: 768px;
+  background: #515a78;
+  overflow: visible;
+  transform-origin: top center;
 }
 
 .card-shadow {
@@ -31,12 +34,11 @@ body {
   left: 372px;
   top: 17px;
   width: 548px;
-  min-height: 798px; /* height 대신 min-height 사용 */
-  height: auto;       /* 내용물에 맞춰 자동 조절 */
+  height: 798px;
   border-radius: 24px;
   background: #505075;
-  filter: drop-shadow(4px 4px 0px rgba(0, 0, 0, 0.25));
-  z-index: 2;
+  box-shadow: 8px 9px 4px rgba(0, 0, 0, 0.25);
+  z-index: 1;
 }
 
 .card-frame {
@@ -44,21 +46,18 @@ body {
   left: 366px;
   top: 11px;
   width: 548px;
-  min-height: 798px; /* height 대신 min-height 사용 */
-  height: auto;       /* 내용물에 맞춰 자동 조절 */
+  height: 798px;
   border-radius: 16px;
   overflow: hidden;
-  filter: drop-shadow(4px 4px 0px rgba(0, 0, 0, 0.25));
+  box-shadow: 15px 15px 4px rgba(0, 0, 0, 0.25);
   z-index: 2;
 }
 
 .bg-image {
-  position: absolute;
-  top: 0;
-  left: 0;
+  display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover; 
+  object-fit: cover;
   pointer-events: none;
 }
 
@@ -77,12 +76,12 @@ body {
 }
 
 .input-panel {
-  left: 415px;
+  left: 431px;
   top: 171px;
   width: 425px;
   height: 126px;
   opacity: 0.8;
-  filter: drop-shadow(4px 4px 0px rgba(0, 0, 0, 0.25));
+  filter: drop-shadow(4px 4px 0 rgba(0, 0, 0, 0.25));
   transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   transform-origin: center center;
 }
@@ -93,7 +92,7 @@ body {
   width: 287px;
   height: 114px;
   opacity: 0.8;
-  filter: drop-shadow(4px 4px 0px rgba(0, 0, 0, 0.25));
+  filter: drop-shadow(4px 4px 0 rgba(0, 0, 0, 0.25));
 }
 
 .result-panel {
@@ -123,7 +122,7 @@ body {
   top: 351px;
   width: 70px;
   height: 59px;
-  filter: drop-shadow(4px 4px 0px rgba(0, 0, 0, 0.25));
+  filter: drop-shadow(4px 4px 0 rgba(0, 0, 0, 0.25));
   transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   transform-origin: center center;
 }
@@ -131,9 +130,9 @@ body {
 .finger-icon {
   left: 569px;
   top: 361px;
-  width: 35px;
-  height: 40px;
-  filter: drop-shadow(4px 4px 0px rgba(0, 0, 0, 0.25));
+  width: 48px;
+  height: 39px;
+  filter: drop-shadow(4px 4px 0 rgba(0, 0, 0, 0.25));
   transform: rotate(90deg);
   animation: floatFinger 3s ease-in-out infinite;
 }
@@ -141,9 +140,9 @@ body {
 .title-input {
   position: absolute;
   left: 440px;
-  top: 190px;
-  width: 420px;
-  height: 82px;
+  top: 198px;
+  width: 390px;
+  height: 60px;
   z-index: 10;
   background: transparent;
   border: none;
@@ -158,7 +157,6 @@ body {
   color: transparent;
 }
 
-/* 제목 입력창에 마우스를 올리거나 클릭할 때 패널 모핑 */
 .title-input:hover + .input-panel,
 .title-input:focus + .input-panel {
   transform: scale(1.03);
@@ -187,7 +185,6 @@ body {
   cursor: pointer;
 }
 
-/* 히트 영역에 마우스 올릴 때 파일 버튼 모핑 */
 .file-hit-area:hover ~ .file-button {
   transform: scale(1.08);
 }
@@ -228,6 +225,7 @@ body {
   display: none;
   padding: 20px;
   border-radius: 10px;
+  overflow: visible;
 }
 
 .result-area.is-visible {
@@ -236,22 +234,11 @@ body {
 
 #resultCanvas {
   display: block;
+  width: 100%;
   max-width: 100%;
   height: auto;
   margin: 0 auto;
   background: white;
-}
-
-.download-button {
-  display: block;
-  width: fit-content;
-  margin: 15px auto 0;
-  padding: 10px 18px;
-  border-radius: 8px;
-  background: #222;
-  color: #fff;
-  font-size: 14px;
-  cursor: pointer;
 }
 
 @keyframes floatFinger {
@@ -263,13 +250,56 @@ body {
   }
 }
 
-@media (max-width: 900px) {
-  .sheetmusic-app {
-    transform: scale(calc(100vw / 1366));
-    transform-origin: top center;
-  }
+.download-button {
+  display: block;
+  width: 138px;
+  height: 40px;
+  margin: 15px auto 0;
+  padding: 0;
+  border: none;
+  border-radius: 10px;
+  background: url("image/ok.png") center / contain no-repeat;
+  cursor: pointer;
+  filter: drop-shadow(4px 4px 0 rgba(0, 0, 0, 0.25));
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    filter 0.2s ease;
+  animation: floatOk 2.8s ease-in-out infinite;
+}
 
+.download-button:hover {
+  transform: translateY(-2px) scale(1.04);
+  filter: drop-shadow(6px 6px 0 rgba(0, 0, 0, 0.28));
+}
+
+.download-button:active {
+  transform: translateY(0) scale(0.98);
+}
+
+@keyframes floatOk {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@media (max-width: 900px) {
   body {
     justify-content: flex-start;
+  }
+
+  .sheetmusic-app {
+    width: 100vw;
+    min-height: 100vh;
+    height: auto;
+    transform: scale(calc(min(100vw, 1366px) / 1366));
+  }
+}
+
+@media (min-width: 1367px) {
+  .sheetmusic-app {
+    transform: none;
   }
 }
