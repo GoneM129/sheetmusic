@@ -15,15 +15,14 @@ body {
   align-items: center;
   background: #202020;
   font-family: "Malgun Gothic", "Noto Sans KR", sans-serif;
-  overflow: hidden;
+  overflow: auto;
 }
 
 .sheetmusic-app {
   position: relative;
   width: 1366px;
-  height: 768px;
+  min-height: 768px; 
   background: #515a78;
-  overflow: hidden;
 }
 
 .card-shadow {
@@ -34,7 +33,7 @@ body {
   height: 798px;
   border-radius: 24px;
   background: #505075;
-  box-shadow: 8px 9px 4px rgba(0, 0, 0, 0.25);
+  filter: drop-shadow(4px 4px 0px rgba(0, 0, 0, 0.25));
 }
 
 .card-frame {
@@ -45,7 +44,7 @@ body {
   height: 798px;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 15px 15px 4px rgba(0, 0, 0, 0.25);
+  filter: drop-shadow(4px 4px 0px rgba(0, 0, 0, 0.25));
 }
 
 .bg-image {
@@ -75,7 +74,7 @@ body {
   width: 425px;
   height: 126px;
   opacity: 0.8;
-  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.25);
+  filter: drop-shadow(4px 4px 0px rgba(0, 0, 0, 0.25));
 }
 
 .logo {
@@ -84,7 +83,7 @@ body {
   width: 287px;
   height: 114px;
   opacity: 0.8;
-  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.25);
+  filter: drop-shadow(4px 4px 0px rgba(0, 0, 0, 0.25));
 }
 
 .result-panel {
@@ -114,7 +113,7 @@ body {
   top: 351px;
   width: 70px;
   height: 59px;
-  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+  filter: drop-shadow(4px 4px 0px rgba(0, 0, 0, 0.25));
 }
 
 .finger-icon {
@@ -122,7 +121,7 @@ body {
   top: 361px;
   width: 48px;
   height: 39px;
-  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+  filter: drop-shadow(4px 4px 0px rgba(0, 0, 0, 0.25));
   transform: rotate(90deg);
 }
 
@@ -201,9 +200,7 @@ body {
   left: 431px;
   top: 451px;
   width: 425px;
-  height: 358px;
   z-index: 5;
-  overflow: auto;
   display: none;
   padding: 20px;
   border-radius: 10px;
