@@ -1,0 +1,101 @@
+.mac-book-air-1,
+.mac-book-air-1 * {
+  box-sizing: border-box;
+}
+.mac-book-air-1 {
+  background: #515a78;
+  height: 832px;
+  position: relative;
+  overflow: hidden;
+}
+.rectangle-1 {
+  background: #505075;
+  border-radius: 24px;
+  width: 548px;
+  height: 798px;
+  position: absolute;
+  left: 372px;
+  top: 11px;
+  box-shadow: 8px 9px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.e-15-c-630-c-7-fa-6-ec-5523738648-a-2-ea-8259-1 {
+  border-radius: 16px;
+  width: 548px;
+  height: 798px;
+  position: absolute;
+  left: 366px;
+  top: 5px;
+  box-shadow: 15px 15px 4px 0px rgba(0, 0, 0, 0.25);
+  object-fit: cover;
+  aspect-ratio: 548/798;
+}
+._1 {
+  opacity: 0.8;
+  width: 425px;
+  height: 126px;
+  position: absolute;
+  left: 431px;
+  top: 165px;
+  box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.25);
+  object-fit: cover;
+}
+._12 {
+  opacity: 0.8;
+  width: 287px;
+  height: 114px;
+  position: absolute;
+  left: 496px;
+  top: 34px;
+  box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.25);
+  object-fit: cover;
+  aspect-ratio: 287/114;
+}
+._2 {
+  opacity: 0.5;
+  width: 425px;
+  height: 358px;
+  position: absolute;
+  left: 431px;
+  top: 445px;
+  object-fit: cover;
+}
+._13 {
+  width: 209px;
+  height: 18px;
+  position: absolute;
+  left: 440px;
+  top: 171px;
+  object-fit: cover;
+  aspect-ratio: 209/18;
+}
+._2-1 {
+  width: 400px;
+  height: 35px;
+  position: absolute;
+  left: 440px;
+  top: 304px;
+  object-fit: cover;
+  aspect-ratio: 400/35;
+}
+._14 {
+  width: 70px;
+  height: 59px;
+  position: absolute;
+  left: 634px;
+  top: 345px;
+  box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  object-fit: cover;
+  aspect-ratio: 70/59;
+}
+._15 {
+  width: 39px;
+  height: 48px;
+  position: absolute;
+  left: 617px;
+  top: 355px;
+  box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  transform-origin: 0 0;
+  transform: rotate(90deg) scale(1, 1);
+  object-fit: cover;
+  aspect-ratio: 39/48;
+}
