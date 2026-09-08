@@ -21,8 +21,24 @@ body {
 .sheetmusic-app {
   position: relative;
   width: 1366px;
-  min-height: 100vh; /* 화면 높이에 꽉 차게 변경 */
+  min-height: 100vh;
   background: #dcd6f7;
+  overflow: hidden;
+}
+
+/* GIF나 패턴 이미지가 화면 전체에 깔리며 자연스럽게 움직이는 배경 레이어 */
+.sheetmusic-app::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('image/49c8c18f9af07b179931c9a42f9a8a3d.gif');
+  background-repeat: repeat;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.3;
 }
 
 .card-shadow {
@@ -34,6 +50,7 @@ body {
   border-radius: 24px;
   background: #505075;
   filter: drop-shadow(4px 4px 0px rgba(0, 0, 0, 0.25));
+  z-index: 2;
 }
 
 .card-frame {
@@ -45,6 +62,7 @@ body {
   border-radius: 16px;
   overflow: hidden;
   filter: drop-shadow(4px 4px 0px rgba(0, 0, 0, 0.25));
+  z-index: 2;
 }
 
 .bg-image {
@@ -66,6 +84,7 @@ body {
   display: block;
   pointer-events: none;
   user-select: none;
+  z-index: 3;
 }
 
 .input-panel {
@@ -75,6 +94,8 @@ body {
   height: 126px;
   opacity: 0.8;
   filter: drop-shadow(4px 4px 0px rgba(0, 0, 0, 0.25));
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform-origin: center center;
 }
 
 .logo {
@@ -114,6 +135,8 @@ body {
   width: 70px;
   height: 59px;
   filter: drop-shadow(4px 4px 0px rgba(0, 0, 0, 0.25));
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform-origin: center center;
 }
 
 .finger-icon {
@@ -123,6 +146,7 @@ body {
   height: 40px;
   filter: drop-shadow(4px 4px 0px rgba(0, 0, 0, 0.25));
   transform: rotate(90deg);
+  animation: floatFinger 3s ease-in-out infinite;
 }
 
 .title-input {
@@ -143,6 +167,12 @@ body {
 
 .title-input::placeholder {
   color: transparent;
+}
+
+/* 제목 입력창에 마우스를 올리거나 클릭할 때 패널 모핑 */
+.title-input:hover + .input-panel,
+.title-input:focus + .input-panel {
+  transform: scale(1.03);
 }
 
 .file-input {
@@ -166,6 +196,11 @@ body {
   background: transparent;
   border: none;
   cursor: pointer;
+}
+
+/* 히트 영역에 마우스 올릴 때 파일 버튼 모핑 */
+.file-hit-area:hover ~ .file-button {
+  transform: scale(1.08);
 }
 
 .merge-button {
@@ -200,7 +235,7 @@ body {
   left: 431px;
   top: 451px;
   width: 425px;
-  z-index: 5;
+  z-index: 15;
   display: none;
   padding: 20px;
   border-radius: 10px;
@@ -230,18 +265,6 @@ body {
   cursor: pointer;
 }
 
-@media (max-width: 900px) {
-  .sheetmusic-app {
-    transform: scale(calc(100vw / 1366));
-    transform-origin: top center;
-  }
-
-  body {
-    justify-content: flex-start;
-  }
-}
-
-/* 손가락이 위아래로 부드럽게 움직이는 애니메이션 */
 @keyframes floatFinger {
   0%, 100% {
     transform: translateY(0) rotate(90deg);
@@ -251,61 +274,13 @@ body {
   }
 }
 
-.finger-icon {
-  animation: floatFinger 3s ease-in-out infinite;
-}
-
-.file-button {
-  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  transform-origin: center center;
-}
-
-/* 히트 영역에 마우스를 올렸을 때 바로 다음에 오는 파일 이미지가 확대되도록 설정 */
-.file-hit-area:hover + .file-button {
-  transform: scale(1.08);
-}
-
-
-/* 입력 패널 기본 전환 효과 */
-.input-panel {
-  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  transform-origin: center center;
-}
-
-/* 제목 입력칸에 마우스를 올리거나 포커스(클릭)했을 때 패널 이미지가 확대 (모핑) */
-.title-input:hover + .input-panel,
-.title-input:focus + .input-panel {
-  transform: scale(1.03);
-}
-
-/* 픽셀 입자가 대각선으로 무한 슬라이드되는 애니메이션 */
-@keyframes pixelSlide {
-  0% {
-    background-position: 0 0;
+@media (max-width: 900px) {
+  .sheetmusic-app {
+    transform: scale(calc(100vw / 1366));
+    transform-origin: top center;
   }
-  100% {
-    background-position: 200px 200px;
+
+  body {
+    justify-content: flex-start;
   }
-}
-
-/* 액자(.card-frame) 뒤나 앱 전체에 흐르는 픽셀 레이어 생성 */
-.sheetmusic-app::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  /* 'dust-pattern.png' 자리에 투명 도트/먼지 패턴 이미지 파일명을 넣으세요 */
-  background-image: url('image/49c8c18f9af07b179931c9a42f9a8a3d.gif'); 
-  background-repeat: repeat;
-  animation: pixelSlide 20s linear infinite;
-  pointer-events: none;
-  z-index: 1;
-  opacity: 0.2; /* 투명도를 주어 너무 산만하지 않게 조절 */
-}
-
-/* 기존 콘텐츠들이 픽셀 레이어보다 위에 오도록 z-index 확보 */
-.card-frame, .input-panel, .logo, .title-input, .file-input, .file-hit-area, .merge-button, .result-area {
-  z-index: 2;
 }
