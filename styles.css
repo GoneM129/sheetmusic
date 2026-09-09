@@ -8,15 +8,30 @@ body {
   width: 100%;
   min-height: 100%;
 }
+/* 1. 배경이 대각선으로 끝없이 흘러가는 애니메이션 */
+@keyframes movePattern {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    /* 끊김 없는 무한 루프를 위해 background-size와 동일한 값(100px)으로 설정 */
+    background-position: 50% 50%; 
+  }
+}
 
+/* 2. body에 애니메이션 속성 추가 */
 body {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  background: #515a78;
   font-family: "Malgun Gothic", "Noto Sans KR", sans-serif;
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: auto;
+  background-image: url('image/pixelpattern.jpg'); /* 사용할 패턴 이미지 */
+  background-repeat: repeat;
+  background-size: 50%; /* 패턴 크기 */
+  
+  /* 30s는 이동 속도입니다. 숫자를 키울수록 더 느리게 움직입니다. */
+  animation: movePattern 30s linear infinite; 
 }
 
 .sheetmusic-app {
@@ -24,21 +39,23 @@ body {
   width: min(100vw, 1366px);
   min-height: 768px;
   height: 768px;
-  background: #515a78;
   overflow: visible;
   transform-origin: top center;
 }
 
+/* 2. 카드 그림자 강화 */
 .card-shadow {
   position: absolute;
   left: 372px;
   top: 17px;
   width: 548px;
-  height: 798px;
+  min-height: 798px;
+  height: auto;
   border-radius: 24px;
   background: #505075;
-  box-shadow: 8px 9px 4px rgba(0, 0, 0, 0.25);
-  z-index: 1;
+  /* 그림자의 거리(12px)와 진하기(0.4)를 늘려 입체감 극대화 */
+  filter: drop-shadow(12px 12px 0px rgba(0, 0, 0, 0.4));
+  z-index: 2;
 }
 
 .card-frame {
