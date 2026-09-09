@@ -293,6 +293,8 @@ body {
     width: 100vw;
     min-height: 100vh;
     height: auto;
+    margin: 0;
+    transform-origin: top left;
     transform: scale(calc(min(100vw, 1366px) / 1366));
   }
 }
