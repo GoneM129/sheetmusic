@@ -31,7 +31,7 @@ body {
   background-size: 50%; /* 패턴 크기 */
   
   /* 30s는 이동 속도입니다. 숫자를 키울수록 더 느리게 움직입니다. */
-  animation: movePattern 30s linear infinite; 
+  animation: movePattern 50s linear infinite; 
 }
 
 .sheetmusic-app {
